@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://rana123:rana123@devconnector-jxbdc.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtPrivateKey": "myprivatekey",
+  "githubClientId": "57ab1f895d2b748036ba",
+  "githubSecret": "54c4f8e7e6c883c33c22b4ace674a2c86cc91284"
+}
