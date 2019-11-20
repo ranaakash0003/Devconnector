@@ -10,7 +10,6 @@ const { User, validateUser } = require("../../models/User");
 //  @access   public
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const { name, email, password } = req.body;

@@ -116,9 +116,7 @@ const Profile = mongoose.model("Profile", profileSchema);
 function validateProfile(profile) {
   const schema = Joi.object({
     // user: Joi.required(),
-    company: Joi.string()
-      .required()
-      .max(100),
+    company: Joi.string().max(100),
     status: Joi.string()
       .required()
       .max(50),
@@ -126,16 +124,18 @@ function validateProfile(profile) {
     skills: Joi.array()
       .items(Joi.string())
       .required(),
-    location: Joi.string().required(),
+    location: Joi.string(),
     bio: Joi.string(),
     githubusername: Joi.string(),
-    social: Joi.object({
-      twitter: Joi.string(),
-      facebook: Joi.string(),
-      youtube: Joi.string(),
-      linkedin: Joi.string(),
-      instagram: Joi.string()
-    })
+    social: Joi.object(
+      {
+      twitter: Joi.string().allow('').optional(),
+      facebook: Joi.string().allow('').optional(),
+      youtube: Joi.string().allow('').optional(),
+      linkedin: Joi.string().allow('').optional(),
+      instagram: Joi.string().allow('').optional()
+    }
+    )
   });
 
   return schema.validate(profile);

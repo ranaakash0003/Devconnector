@@ -14,7 +14,6 @@ const Joi = require("@hapi/joi");
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.currentUser._id).select("-password");
-    console.log(user);
     res.json(user);
   } catch (error) {
     console.log(error.message);

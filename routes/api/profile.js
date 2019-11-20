@@ -53,8 +53,8 @@ router.post("/", auth, async (req, res) => {
       githubusername,
       social
     } = req.body;
-
-    let user = req.currentUser._id;
+    
+    const user = req.currentUser._id;
     let profile = await Profile.findOne({ user });
     if (profile) return res.status(400).send("Profile already exists");
 
@@ -71,7 +71,7 @@ router.post("/", auth, async (req, res) => {
       education,
       social
     });
-    if (req.currentUser._id == profile.user) {
+    if (req.currentUser._id === profile.user.toString()) {
       await profile.save();
       return res.json(profile);
     } else {
@@ -83,7 +83,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// @route    GET api/profile/me
+// @route    GET api/profile
 // @desc    Get all users profile
 //@access   Public
 
@@ -115,7 +115,7 @@ router.get("/user/:user_id", async (req, res) => {
     res.json(profile);
   } catch (error) {
     console.log(error.message);
-    if (error.kind == "ObjectId") {
+    if (error.kind.toString() === "ObjectId") {
       return res.status(400).json({ msg: "Profile not found" });
     }
     res.status(500).send("Server Error");

@@ -22,9 +22,9 @@ const authReducer = (state = initialState, action) => {
     case USER_LOADED:
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: true,    
         loading: false,
-        user: payload
+        user: payload     
       };
 
     case REGISTER_SUCCESS:
