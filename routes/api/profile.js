@@ -53,10 +53,32 @@ router.post("/", auth, async (req, res) => {
       githubusername,
       social
     } = req.body;
-    
+
     const user = req.currentUser._id;
     let profile = await Profile.findOne({ user });
-    if (profile) return res.status(400).send("Profile already exists");
+    if (profile) {
+      //
+      const updatedProfile = await Profile.findOneAndUpdate(
+        { user },
+        {
+          $set: {
+            company,
+            status,
+            website,
+            skills,
+            experience,
+            githubusername,
+            location,
+            bio,
+            education,
+            social
+          }
+        },
+        { new: true }
+      );
+
+      return res.json({ updatedProfile });
+    }
 
     profile = new Profile({
       user,
@@ -161,11 +183,14 @@ router.put("/experience", auth, async (req, res) => {
 
   try {
     const profile = await Profile.findOne({ user: req.currentUser._id });
+    // if(profile.experience === null){
+    //   profile.experience = []
+    // }
     profile.experience.unshift(newExp);
     await profile.save();
     res.json(profile);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.status(500).send("Server Error");
   }
 });

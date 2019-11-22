@@ -127,15 +127,23 @@ function validateProfile(profile) {
     location: Joi.string(),
     bio: Joi.string(),
     githubusername: Joi.string(),
-    social: Joi.object(
-      {
-      twitter: Joi.string().allow('').optional(),
-      facebook: Joi.string().allow('').optional(),
-      youtube: Joi.string().allow('').optional(),
-      linkedin: Joi.string().allow('').optional(),
-      instagram: Joi.string().allow('').optional()
-    }
-    )
+    social: Joi.object({
+      twitter: Joi.string()
+        .allow("")
+        .optional(),
+      facebook: Joi.string()
+        .allow("")
+        .optional(),
+      youtube: Joi.string()
+        .allow("")
+        .optional(),
+      linkedin: Joi.string()
+        .allow("")
+        .optional(),
+      instagram: Joi.string()
+        .allow("")
+        .optional()
+    })
   });
 
   return schema.validate(profile);
@@ -147,7 +155,7 @@ function validateExperience(experience) {
     company: Joi.string(),
     location: Joi.string(),
     from: Joi.date(),
-    to: Joi.date(),
+    to: Joi.date().allow("").optional(),
     current: Joi.boolean(),
     description: Joi.string()
   });
@@ -161,7 +169,7 @@ function validateEducation(education) {
     degree: Joi.string(),
     fieldofstudy: Joi.string(),
     from: Joi.date(),
-    to: Joi.date(),
+    to: Joi.date().allow("").optional(),
     current: Joi.boolean(),
     description: Joi.string()
   });

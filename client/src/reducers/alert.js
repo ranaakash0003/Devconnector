@@ -7,7 +7,6 @@ const alertReducer = (state = initialState, action) => {
 
   switch (type) {
     case SET_ALERT:
-      // removeAlert();
       return [...state, payload];
     case REMOVE_ALERT:
       return state.filter(alert => alert.id !== payload);
@@ -15,4 +14,5 @@ const alertReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default alertReducer;
